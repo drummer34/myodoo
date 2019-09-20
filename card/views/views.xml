@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views-->
+        <record id="view_card_form" model="ir.ui.view">
+            <field name="name">card.device.form</field>
+            <field name="model">card.device</field>
+            <field name="arch" type="xml">
+                <form string="Alan tanımlama">
+                    <header>
+                        <button name="check_button" type="object"
+                        string="Check Button" />
+                    </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ip_address"/>
+                            <field name="direction"/>
+                            <field name="location_id"/>
+                        </group>
+                        <group>
+                            <field name="image_location" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="view_card_tree" model="ir.ui.view">
+  			<field name="name">card.device.tree</field>
+  			<field name="model">card.device</field>
+  			<field name="arch" type="xml">
+            	<tree>
+      				<field name="ip_address"/>
+                    <field name="direction"/>
+            	</tree>
+            </field>
+		</record>
+
+        <record id="view_card_movement_form" model="ir.ui.view">
+            <field name="name">card.movement.form</field>
+            <field name="model">card.movement</field>
+            <field name="arch" type="xml">
+                <form string="Hareketler">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="trackDateTime"/>
+                            <field name="device_id"/>
+                            <field name="object_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="view_card_movement_tree" model="ir.ui.view">
+  			<field name="name">card.movement.tree</field>
+  			<field name="model">card.movement</field>
+  			<field name="arch" type="xml">
+            	<tree>
+      				<field name="trackDateTime"/>
+            	</tree>
+            </field>
+		</record>
+
+
+     <record id="view_card_location_form" model="ir.ui.view">
+            <field name="name">card.location.form</field>
+            <field name="model">card.location</field>
+            <field name="arch" type="xml">
+                <form string="Yerler">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="image" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="view_card_location_tree" model="ir.ui.view">
+  			<field name="name">card.location.tree</field>
+  			<field name="model">card.location</field>
+  			<field name="arch" type="xml">
+            	<tree>
+      				<field name="name"/>
+            	</tree>
+            </field>
+		</record>
+
+
+
+    <record id="view_card_device_object_form" model="ir.ui.view">
+            <field name="name">card.deviceobject.form</field>
+            <field name="model">card.deviceobject</field>
+            <field name="arch" type="xml">
+                <form string="Yerler">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="iot_code"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="view_card_device_object_tree" model="ir.ui.view">
+  			<field name="name">card.deviceobject.tree</field>
+  			<field name="model">card.deviceobject</field>
+  			<field name="arch" type="xml">
+            	<tree>
+      				<field name="name"/>
+                    <field name="iot_code"/>
+                    <field name="partner_id"/>
+            	</tree>
+            </field>
+		</record>
+
+
+
+    <!--    Actions-->
+        <record id="card_action_device" model = "ir.actions.act_window">    <!-- Aygıtlar tab ine basınca olacak olayın tanımlandığı yer-->
+            <field name="name">Cihaz Tanımlama Ekranı</field>
+            <field name="res_model">card.device</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="card_action_movement" model="ir.actions.act_window">    <!-- Hareketler tab ine basınca olacak olayın tanımlandığı yer-->
+            <field name="name">Hareket Tanımlama Ekranı</field>
+            <field name="res_model">card.movement</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="card_action_previous_form" model="ir.actions.act_window">
+            <field name="name">Önceki Hareketler</field>
+            <field name="res_model">card.movement</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="card_action_location" model="ir.actions.act_window">    <!-- Yerler tab ine basınca olacak olayın tanımlandığı yer-->
+            <field name="name">Yer Tanımlama Ekranı</field>
+            <field name="res_model">card.location</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="card_action_device_object" model="ir.actions.act_window">    <!-- Nesneler  tab ine basınca olacak olayın tanımlandığı yer-->
+            <field name="name">Nesne Tanımlama Ekranı</field>
+            <field name="res_model">card.deviceobject</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- Menus-->
+        <menuitem id="menu_card_root" name="CARD" sequence="1" />
+
+        <menuitem id="menu_card_device" name="AYGITLAR" parent ="menu_card_root" sequence="10" action="card_action_device" />   <!-- Aygıtlar Tab'i -->
+
+        <menuitem id="menu_card_movement" name="HAREKETLER" parent ="menu_card_root" sequence="20" action="card_action_movement" />
+
+        <menuitem id="menu_card_previous_movement" name="Onceki Hareketler" parent ="menu_card_movement"  sequence="1" action="card_action_previous_form" />
+
+        <menuitem id="menu_card_location" name="YERLER" parent ="menu_card_root" sequence="30" action="card_action_location" />
+
+        <menuitem id="menu_card_device_object" name="NESNELER" parent ="menu_card_root" sequence="40" action="card_action_device_object" />
+
+        <menuitem id="menu_card_previous_movement" name="Onceki Hareketler" parent ="menu_card_movement"  sequence="1" action="card_action_previous_form" />
+
+</odoo>
